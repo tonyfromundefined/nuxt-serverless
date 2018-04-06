@@ -25,6 +25,18 @@ module.exports = {
 }
 ```
 
+Edit `provider/region` property in `serverless.yml`
+
+```yaml
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ap-northeast-2  # Edit region name
+  environment:
+    NODE_ENV: production
+```
+
 And `AWS-CLI` should be configured  
 
 ```bash
