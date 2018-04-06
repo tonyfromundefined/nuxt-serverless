@@ -1,4 +1,4 @@
-# 🚀 Nuxt.js SSR on AWS (Lambda + API Gateway + S3) Serverless
+# 🚀 Nuxt.js SSR on AWS Serverless Stack (Lambda + API Gateway + S3)
 
 Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework* 
   
