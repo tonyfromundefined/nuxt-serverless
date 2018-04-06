@@ -1,10 +1,39 @@
-# Nuxt.js SSR on AWS (Lambda + API Gateway + S3) Serverless
+# 🚀 Nuxt.js SSR on AWS (Lambda + API Gateway + S3) Serverless
 
-> Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with Serverless Framework
+Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework* 
+  
+## Pre-requisites
+- 🧙‍♂️ **IAM Account** for *Serverless framework*
+- 🛢 **S3 Bucket** for bundled client assets (js, css, ...)
+	1. Bucket name
+	2. Region  
+- 🌏 **CloudFront Distribution** serves files in S3 with `https` protocols
+	1. Distribution URL
+	2. Distribution ID
+
+## Configuration
+Create `aws.config.js` in root folder (`aws.config.example.js` is in the folder)
+
+```js
+module.exports = {
+  accessKeyId: '',
+  secretAccessKey: '',
+  region: '',
+  s3BucketName: '', // where the bundled assets uploaded
+  cloudfrontUrl: '',
+  cloudfrontDistributionId: '',
+}
+```
+
+And `AWS-CLI` should be configured  
+
+```bash
+$ aws configure
+```
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn
 
@@ -20,7 +49,7 @@ $ yarn deploy
 
 ## To-do
 - [ ] gzip Compression
-- [ ] Bundling (Bundling the package uploaded to Lambda)
-- [ ] Babel Support
+- [ ] Server-side Bundling
+- [ ] Server-side Babel Support
 - [ ] TypeScript Support
 - [ ] Nuxt.js 2.0 (`nuxt-edge`) Support
