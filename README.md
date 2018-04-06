@@ -3,7 +3,7 @@
 Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework* 
   
 ## Pre-requisites
-- 🧙‍♂️ **IAM Account** for *Serverless framework*
+- 🔑 **IAM Account** for *Serverless framework*
 - 🛢 **S3 Bucket** for bundled client assets (js, css, ...)
 	1. Bucket name
 	2. Region  
