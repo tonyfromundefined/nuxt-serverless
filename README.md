@@ -20,7 +20,7 @@ module.exports = {
   secretAccessKey: '',
   region: '',
   s3BucketName: '', // where the bundled assets uploaded
-  cloudfrontUrl: '',
+  cloudfrontUrl: '', // must attach '/' end of url
   cloudfrontDistributionId: '',
 }
 ```

@@ -3,6 +3,6 @@ module.exports = {
   secretAccessKey: '',
   region: '',
   s3BucketName: '',
-  cloudfrontUrl: '',
+  cloudfrontUrl: '', // must attach '/' end of url
   cloudfrontDistributionId: '',
 }
