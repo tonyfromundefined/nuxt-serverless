@@ -1,0 +1,14 @@
+# package directories
+node_modules
+jspm_packages
+yarn.lock
+yarn-error.log
+
+# Serverless directories
+.serverless
+
+# Nuxt directories
+.nuxt
+
+# AWS Configuration
+aws.config.js
