@@ -12,3 +12,6 @@ yarn-error.log
 
 # AWS Configuration
 aws.config.js
+
+# lambda
+lambda/dist

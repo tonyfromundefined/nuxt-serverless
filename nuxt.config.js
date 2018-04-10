@@ -13,32 +13,32 @@ const config = {
     // Disabled gzip compression
     gzip: { threshold: 1073741824 },
   },
+  build: {
+    extractCSS: true,
+  },
 }
 
 // 'webpack-s3-plugin' doesn't packaged in lambda function
 if (process.env.NODE_ENV !== 'production') {
   const WebpackS3Plugin = require('webpack-s3-plugin')
   const awsConfig = require('./aws.config')
-  config.build = {
-    extractCSS: true,
-    publicPath: awsConfig.cloudfrontUrl,
-    plugins: [
-      new WebpackS3Plugin({
-        s3Options: {
-          accessKeyId: awsConfig.accessKeyId,
-          secretAccessKey: awsConfig.secretAccessKey,
-          region: awsConfig.region,
-        },
-        s3UploadOptions: {
-          Bucket: awsConfig.s3BucketName,
-        },
-        cloudfrontInvalidateOptions: {
-          DistributionId: awsConfig.cloudfrontDistributionId,
-          Items: ["/*"],
-        },
-      }),
-    ],
-  }
+  config.build.publicPath = awsConfig.cloudfrontUrl
+  config.build.plugins = [
+    new WebpackS3Plugin({
+      s3Options: {
+        accessKeyId: awsConfig.accessKeyId,
+        secretAccessKey: awsConfig.secretAccessKey,
+        region: awsConfig.region,
+      },
+      s3UploadOptions: {
+        Bucket: awsConfig.s3BucketName,
+      },
+      cloudfrontInvalidateOptions: {
+        DistributionId: awsConfig.cloudfrontDistributionId,
+        Items: ["/*"],
+      },
+    }),
+  ]
 }
 
 module.exports = config

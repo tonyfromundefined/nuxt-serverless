@@ -1,11 +1,4 @@
 service: nuxt-serverless-template
-package:
-  exclude:
-    - src/**
-    - aws.config.js
-    - aws.config.example.js
-    - README.md
-    - yarn-error.log
 
 provider:
   name: aws
