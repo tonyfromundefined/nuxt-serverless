@@ -61,7 +61,6 @@ $ yarn deploy
 
 ## To-do
 - [ ] gzip Compression
-- [ ] Server-side Bundling
-- [ ] Server-side Babel Support
-- [ ] TypeScript Support
+- [v] Server-side Bundling
 - [ ] Nuxt.js 2.0 (`nuxt-edge`) Support
+- [ ] AWS Assets Automation
