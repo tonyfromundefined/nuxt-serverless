@@ -1,25 +1,38 @@
 {
-  "name": "nuxt-serverless-template",
-  "version": "1.0.0",
-  "description": "Nuxt.js SSR(Server-side Rendering) Starter Template with Serverless Framework",
-  "main": "index.js",
-  "author": "Jee Hyuk Won (Tony) <jee@hyuk.io>",
-  "license": "MIT",
-  "private": false,
+  "name": "nuxt-edge-serverless-template",
+  "version": "0.0.2",
   "scripts": {
     "dev": "npx nuxt",
-    "build": "npx nuxt build && cp -r .nuxt/dist lambda/dist",
-    "offline": "cd lambda && npx sls offline start",
-    "deploy": "cd lambda && npx sls deploy"
-  },
-  "devDependencies": {
-    "serverless": "^1.26.1",
-    "serverless-offline": "^3.20.1",
-    "webpack-s3-plugin": "git+https://github.com/jeehyukwon/s3-plugin-webpack"
+    "build": "npx build",
+    "offline": "npx sls offline",
+    "create": "npx sls create_domain && npx nuxt build && npx sls deploy",
+    "deploy": "npx nuxt build && npx sls deploy",
+    "remove": "npx sls delete_domain && npx sls remove"
   },
   "dependencies": {
-    "express": "^4.16.3",
-    "nuxt": "^1.4.0",
-    "vue-server-renderer": "^2.5.16"
+    "clone": "^1.0.4",
+    "core-js": "^2.5.5",
+    "debug": "^3.1.0",
+    "nuxt-edge": "^2.0.0-25390984.952dfe0",
+    "vue": "^2.5.16",
+    "vue-meta": "^1.5.0",
+    "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.16",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "nuxt-property-decorator": "1.0.0",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "require-yml": "^1.3.1",
+    "serverless": "^1.26.1",
+    "serverless-domain-manager": "^2.3.6",
+    "serverless-offline": "^3.20.1",
+    "serverless-s3-sync": "^1.3.0",
+    "serverless-webpack": "^5.1.1",
+    "ts-loader": "^4.2.0",
+    "typescript": "^2.8.1",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-node-externals": "^1.7.2"
   }
 }

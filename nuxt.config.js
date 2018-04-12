@@ -1,44 +1,48 @@
-const config = {
-  head: {
-    title: 'Nuxt.js Serverless Template',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js Serverless Project' },
-    ],
-  },
+const yaml = require('require-yml')
+const serverlessConfig = yaml('./serverless.yml')
+const awsRegion = serverlessConfig.provider.region
+const awsS3BucketName = serverlessConfig.resources.Resources.AssetsBucket.Properties.BucketName
+
+module.exports = {
+  head: {},
+  loading: { color: '#51cf66' },
   srcDir: 'src/',
+  extensions: ['js', 'ts'],
+  build: {
+    extractCSS: true,
+    publicPath: `https://s3.${awsRegion}.amazonaws.com/${awsS3BucketName}/`,
+    extend(config, { isServer }) {
+      const tsLoader = {
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true,
+        },
+        exclude: [
+          /vendor/,
+          /\.nuxt/,
+        ],
+      }
+      config.module.rules.push({
+        test: /((client|server)\.js)|(\.tsx?)$/,
+        ...tsLoader,
+      })
+      config.resolve.extensions.push('.ts')
+      config.module.rules.map((rule) => {
+        if (rule.loader === 'vue-loader') {
+          rule.options.loaders = {
+            ts: tsLoader,
+          }
+        }
+      })
+      if (isServer) {
+        config.externals = []
+      }
+    },
+  },
   render: {
     etag: false,
     // Disabled gzip compression
     gzip: { threshold: 1073741824 },
-  },
-  build: {
-    extractCSS: true,
-  },
+  }
 }
-
-// 'webpack-s3-plugin' doesn't packaged in lambda function
-if (process.env.NODE_ENV !== 'production') {
-  const WebpackS3Plugin = require('webpack-s3-plugin')
-  const awsConfig = require('./aws.config')
-  config.build.publicPath = awsConfig.cloudfrontUrl
-  config.build.plugins = [
-    new WebpackS3Plugin({
-      s3Options: {
-        accessKeyId: awsConfig.accessKeyId,
-        secretAccessKey: awsConfig.secretAccessKey,
-        region: awsConfig.region,
-      },
-      s3UploadOptions: {
-        Bucket: awsConfig.s3BucketName,
-      },
-      cloudfrontInvalidateOptions: {
-        DistributionId: awsConfig.cloudfrontDistributionId,
-        Items: ["/*"],
-      },
-    }),
-  ]
-}
-
-module.exports = config

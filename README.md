@@ -3,64 +3,76 @@
 Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework* 
   
 ## Pre-requisites
-- 🔑 **IAM Account** for *Serverless framework*
-- 🛢 **S3 Bucket** for bundled client assets (js, css, ...)
-	1. Bucket name
-	2. Region  
-- 🌏 **CloudFront Distribution** serves files in S3 with `https` protocols
-	1. Distribution URL
-	2. Distribution ID
-
-## Configuration
-Create `aws.config.js` in root folder (`aws.config.example.js` is in the folder)
-
-```js
-module.exports = {
-  accessKeyId: '',
-  secretAccessKey: '',
-  region: '',
-  s3BucketName: '', // where the bundled assets uploaded
-  cloudfrontUrl: '', // must attach '/' end of url
-  cloudfrontDistributionId: '',
-}
-```
-
-Edit `provider/region` property in `serverless.yml`
-
-```yaml
-provider:
-  name: aws
-  runtime: nodejs8.10
-  stage: dev
-  region: ap-northeast-2  # Edit region name
-  environment:
-    NODE_ENV: production
-```
-
-And `AWS-CLI` should be configured  
+- 🔑 **IAM Account** for *Serverless framework* (Requires pre-configuration using `aws configure`)
 
 ```bash
 $ aws configure
 ```
 
+> API Gateway addresses generated via CloudFront will result in a JavaScript error. (stage routing problem) Please test by attaching Custom Domain
+
+## Configuration
+
+Edit `serverless.yml`
+
+```yaml
+service: "nuxt-edge-serverless-template" # Edit service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: develop
+  region: ap-northeast-2  # Edit region name
+  environment:
+    NODE_ENV: production
+
+resources:
+  Resources:
+    AssetsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: "assets.erion.io" # Specify a new bucket name for client assets
+
+custom:
+  ...
+  s3Sync:
+    - bucketName: "assets.erion.io" # Retype the bucket name specified above
+      localDir: .nuxt/dist
+  customDomain:
+    domainName: "dev.erion.io" # Specify a new domain name to be created
+    stage: develop
+    certificateName: "erion.kr" # Enter the Certicate name with that domain
+    createRoute53Record: true
+```
+
 ## Build Setup
 
 ```bash
-# install dependencies
+# Install dependencies
 $ yarn
 
-# serve with hot reload at localhost:3000
+# Serve develop server at localhost:3000 using Nuxt.js
 $ yarn dev
+
+# Create Domain and S3 Bucket and Deploy bundled assets
+$ yarn create
 
 # build for production and launch local server with 'serverless-offline' plugin
 $ yarn offline
 
-# build for production and deploy to AWS
+# Re-build and deploy assets
 $ yarn deploy
+
+# Remove all serverless stacks
+$ yarn remove
 ```
 
 ## To-do
 - [ ] gzip Compression
-- [v] Server-side Bundling
-- [ ] Nuxt.js 2.0 (`nuxt-edge`) Support
-- [ ] AWS Assets Automation
+- [x] Server-side Bundling
+- [x] TypeScript Support
+- [x] Nuxt.js 2.0 (`nuxt-edge`) Support
+- [x] AWS Assets Automation
+- [ ] CDN (CloudFront) Support
+- [ ] Optimize Configuration
+- [ ] ESLint, TSLint Support
