@@ -9,7 +9,7 @@ Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverle
 $ aws configure
 ```
 
-> API Gateway addresses generated via CloudFront will result in a JavaScript error. (stage routing problem) Please test by attaching Custom Domain
+> API Gateway addresses generated via CloudFront will result in a JavaScript error. (stage routing problem) Please use the below Serverless Framework Configuration to test by attaching Custom Domain
 
 ## Configuration
 
