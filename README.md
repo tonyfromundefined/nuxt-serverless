@@ -77,4 +77,4 @@ $ yarn remove
 - [ ] CDN (CloudFront) Support
 - [ ] Optimize Configuration
 - [ ] ESLint, TSLint Support
-- [ ] HTML Template Interpolation
+- [ ] HTML Template Interpolation SSR
