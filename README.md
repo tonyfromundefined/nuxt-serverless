@@ -72,7 +72,9 @@ $ yarn remove
 - [x] TypeScript Support
 - [x] Nuxt.js 2.0 (`nuxt-edge`) Support
 - [x] AWS Assets Automation
+- [ ] Integrate with express using `aws-serverless-express` (for using `req` in nuxt `context`)
 - [ ] gzip Compression
 - [ ] CDN (CloudFront) Support
 - [ ] Optimize Configuration
 - [ ] ESLint, TSLint Support
+- [ ] HTML Template Interpolation
