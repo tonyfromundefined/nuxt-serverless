@@ -7,7 +7,7 @@
     "offline": "npx sls offline",
     "create": "npx nuxt build && npx sls create_domain && npx sls deploy",
     "deploy": "npx nuxt build && npx sls deploy",
-    "remove": "npx sls delete_domain && npx sls remove"
+    "delete": "npx sls delete_domain && npx sls remove"
   },
   "dependencies": {
     "clone": "^1.0.4",

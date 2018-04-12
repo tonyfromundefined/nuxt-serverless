@@ -54,17 +54,23 @@ $ yarn
 # Serve develop server at localhost:3000 using Nuxt.js
 $ yarn dev
 
-# Create Domain and S3 Bucket and Deploy bundled assets
-$ yarn create
+# Build
+$ yarn build
 
-# build for production and launch local server with 'serverless-offline' plugin
+# launch local server with bundled assets and 'serverless-offline' plugin
 $ yarn offline
 
-# Re-build and deploy assets
+## DEPLOYMENT ##
+# You must run `yarn create` before `yarn build`
+# Build assets, Create Domain and S3 Bucket, Deploy the function and bundled assets
+$ yarn create
+
+# Re-build and deploy the function and bundled assets
 $ yarn deploy
 
-# Remove all serverless stacks
-$ yarn remove
+# Delete all stacks
+# Please do not delete it separately and use this script
+$ yarn delete
 ```
 
 ## To-do
