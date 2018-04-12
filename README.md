@@ -84,3 +84,4 @@ $ yarn delete
 - [ ] Optimize Configuration
 - [ ] ESLint, TSLint Support
 - [ ] HTML Template Interpolation SSR
+- [ ] Sass(SCSS) Support
