@@ -31,17 +31,17 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: "assets.erion.io" # Specify a new bucket name for client assets
+        BucketName: "my.bucket" # Specify a new bucket name for client assets
 
 custom:
   ...
   s3Sync:
-    - bucketName: "assets.erion.io" # Retype the bucket name specified above
+    - bucketName: "my.bucket" # Retype the bucket name specified above
       localDir: .nuxt/dist
   customDomain:
-    domainName: "dev.erion.io" # Specify a new domain name to be created
+    domainName: "dev.abc.com" # Specify a new domain name to be created
     stage: develop
-    certificateName: "erion.kr" # Enter the Certicate name with that domain
+    certificateName: "*.abc.com" # Enter the Certicate name with that domain
     createRoute53Record: true
 ```
 
