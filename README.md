@@ -68,11 +68,11 @@ $ yarn remove
 ```
 
 ## To-do
-- [ ] gzip Compression
 - [x] Server-side Bundling
 - [x] TypeScript Support
 - [x] Nuxt.js 2.0 (`nuxt-edge`) Support
 - [x] AWS Assets Automation
+- [ ] gzip Compression
 - [ ] CDN (CloudFront) Support
 - [ ] Optimize Configuration
 - [ ] ESLint, TSLint Support
