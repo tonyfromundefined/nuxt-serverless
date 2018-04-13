@@ -4,9 +4,9 @@ const awsRegion = serverlessConfig.provider.region
 const awsS3BucketName = serverlessConfig.resources.Resources.AssetsBucket.Properties.BucketName
 
 module.exports = {
+  srcDir: 'src/',
   head: {},
   loading: { color: '#51cf66' },
-  srcDir: 'src/',
   extensions: ['js', 'ts'],
   build: {
     extractCSS: true,

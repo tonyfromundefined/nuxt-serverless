@@ -61,9 +61,9 @@ $ yarn build
 $ yarn offline
 
 ## DEPLOYMENT ##
-# You must run `yarn create` before `yarn build`
+# You must run `yarn hydrate` before `yarn build`
 # Build assets, Create Domain and S3 Bucket, Deploy the function and bundled assets
-$ yarn create
+$ yarn hydrate
 
 # Re-build and deploy the function and bundled assets
 $ yarn deploy
