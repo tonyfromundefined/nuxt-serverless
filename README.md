@@ -90,3 +90,4 @@ $ yarn sls:remove
 - [x] @nuxtjs/axios Support
 - [x] ESLint, TSLint Support
 - [ ] gzip Compression
+- [ ] static file serve
