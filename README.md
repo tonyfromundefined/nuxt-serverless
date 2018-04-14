@@ -24,7 +24,7 @@ Libraries that are used only by the server or that are used by both the server a
 $ aws configure
 ```
 
-> API Gateway addresses generated via CloudFront will result in a JavaScript error. (stage routing problem) Please use the below Serverless Framework Configuration to test by attaching Custom Domain
+> Auto generated URL (https://*.execute-api.aws-region-name.amazonaws.com/*) will result in a JavaScript error. (routing problem) Please use the Custom Domain
 
 ## Configuration
 
