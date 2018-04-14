@@ -84,7 +84,7 @@ $ yarn sls:remove
 - [x] TypeScript Support
 - [x] Nuxt.js 2.0 (`nuxt-edge`) Support
 - [x] AWS Assets Automation
-- [x] Integrate with express using `aws-serverless-express` (for using `req` in nuxt `context`)
+- [x] Integrate with express using `serverless-http` (for using `req` in nuxt `context`)
 - [x] Sass(SCSS) Support
 - [x] @nuxtjs/apollo Support
 - [x] @nuxtjs/axios Support
