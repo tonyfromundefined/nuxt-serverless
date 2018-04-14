@@ -70,7 +70,7 @@ custom:
     - bucketName: "my-s3-bucket" # Retype the bucket name specified above
       localDir: .nuxt/dist
   customDomain:
-    domainName: "my-domain.abc.com" # Specify a new domain name to be created
+    domainName: "nuxt.mydomain.com" # Specify a new domain name to be created
     stage: develop
-    certificateName: "*.abc.com" # Enter the Certicate name with that domain
+    certificateName: "*.mydomain.com" # Enter the Certicate name with that domain
     createRoute53Record: true
