@@ -16,7 +16,7 @@ If you have a feature request, please create a new issue. And also, pull request
 
 # Caution
 - Libraries that are used only by the server or that are used by both the server and the client should be included in the `dependencies`. To optimize the lambda capacity, make sure that the library used only by the client is included in `dev-dependencies`.
-- Auto generated URL (https://*.execute-api.aws-region-name.amazonaws.com/*) will result in a JavaScript error. (routing problem) Please use the Custom Domain
+- Auto generated URL `https://*.execute-api.aws-region-name.amazonaws.com/*` will result in a JavaScript error. (routing problem) Please use the Custom Domain
 
 ## Pre-requisites
 - 🔑 **IAM Account** for *Serverless framework* (Requires pre-configuration using `aws configure`)
