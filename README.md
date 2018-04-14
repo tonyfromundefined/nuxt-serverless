@@ -1,6 +1,18 @@
-# 🚀 Nuxt.js SSR on AWS Serverless Stack (Lambda + API Gateway + S3)
+# 🚀 Nuxt.js 2.0 SSR on AWS Serverless Stack (Lambda + API Gateway + S3)
 
-Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework* 
+Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework*
+
+### Pre-Installed
+- Nuxt.js 2.0 (`nuxt-edge`)
+- Serverless Framework
+- TypeScript
+- Sass (SCSS)
+- ESLint
+- TSLint
+- @nuxtjs/axios
+- @nuxtjs/apollo
+
+If you have a feature request, please create a new issue. And also, pull requests are always welcome🙏
 
 # Caution
 Libraries that are used only by the server or that are used by both the server and the client should be included in the `dependencies`. To optimize the lambda capacity, make sure that the library used only by the client is included in `dev-dependencies`.
