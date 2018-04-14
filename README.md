@@ -1,6 +1,6 @@
 # 🚀 Nuxt.js 2.0 SSR on AWS Serverless Stack (Lambda + API Gateway + S3)
 
-Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework*
+Nuxt.js 2.0 Serverless Server-side Rendering Starter on AWS Serverless Stack (Lambda + API Gateway + S3) with *Serverless Framework*
 
 ### Pre-Installed
 - Nuxt.js 2.0 (`nuxt-edge`)
