@@ -1,7 +1,10 @@
 # 🚀 Nuxt.js SSR on AWS Serverless Stack (Lambda + API Gateway + S3)
 
 Nuxt.js Serverless SSR Starter on AWS (Lambda + API Gateway + S3) with *Serverless Framework* 
-  
+
+# Caution
+Libraries that are used only by the server or that are used by both the server and the client should be included in the `dependencies`. To optimize the lambda capacity, make sure that the library used only by the client is included in `dev-dependencies`.
+
 ## Pre-requisites
 - 🔑 **IAM Account** for *Serverless framework* (Requires pre-configuration using `aws configure`)
 
@@ -31,17 +34,17 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: "my.bucket" # Specify a new bucket name for client assets
+        BucketName: "my-s3-bucket" # Specify a new bucket name for client assets
 
 custom:
   ...
   s3Sync:
-    - bucketName: "my.bucket" # Retype the bucket name specified above
+    - bucketName: "my-s3-bucket" # Retype the bucket name specified above
       localDir: .nuxt/dist
   customDomain:
-    domainName: "dev.abc.com" # Specify a new domain name to be created
+    domainName: "nuxt.mydomain.com" # Specify a new domain name to be created
     stage: develop
-    certificateName: "*.abc.com" # Enter the Certicate name with that domain
+    certificateName: "*.mydomain.com" # Enter the Certicate name with that domain
     createRoute53Record: true
 ```
 
@@ -57,20 +60,23 @@ $ yarn dev
 # Build
 $ yarn build
 
-# launch local server with bundled assets and 'serverless-offline' plugin
-$ yarn offline
+# Prod server start with built assets
+$ yarn start
 
-## DEPLOYMENT ##
-# You must run `yarn hydrate` before `yarn build`
+## SERVERLESS DEPLOYMENT ##
+# You must run `yarn sls:create` before `yarn sls:deploy`
 # Build assets, Create Domain and S3 Bucket, Deploy the function and bundled assets
-$ yarn hydrate
+$ yarn sls:create
+
+# launch local server with bundled assets and 'serverless-offline' plugin
+$ yarn sls:local
 
 # Re-build and deploy the function and bundled assets
-$ yarn deploy
+$ yarn sls:deploy
 
-# Delete all stacks
+# Remove all stacks
 # Please do not delete it separately and use this script
-$ yarn delete
+$ yarn sls:remove
 ```
 
 ## To-do
@@ -78,10 +84,9 @@ $ yarn delete
 - [x] TypeScript Support
 - [x] Nuxt.js 2.0 (`nuxt-edge`) Support
 - [x] AWS Assets Automation
-- [ ] Integrate with express using `aws-serverless-express` (for using `req` in nuxt `context`)
+- [x] Integrate with express using `aws-serverless-express` (for using `req` in nuxt `context`)
+- [x] Sass(SCSS) Support
+- [x] @nuxtjs/apollo Support
+- [x] @nuxtjs/axios Support
+- [x] ESLint, TSLint Support
 - [ ] gzip Compression
-- [ ] CDN (CloudFront) Support
-- [ ] Optimize Configuration
-- [ ] ESLint, TSLint Support
-- [ ] HTML Template Interpolation SSR
-- [ ] Sass(SCSS) Support

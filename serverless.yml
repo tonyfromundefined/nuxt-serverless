@@ -8,6 +8,13 @@ provider:
   environment:
     NODE_ENV: production
 
+package:
+  exclude:
+    - src/**
+
+  include:
+    - serverless.yml
+
 functions:
   nuxtRenderer:
     handler: handler.render
@@ -28,7 +35,7 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: "my.bucket" # Specify a new bucket name for client assets
+        BucketName: "my-s3-bucket" # Specify a new bucket name for client assets
     AssetsBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
@@ -52,32 +59,18 @@ resources:
               Principal: "*"
 
 plugins:
-  - serverless-webpack
   - serverless-offline
   - serverless-s3-sync
   - serverless-domain-manager
 
 custom:
-  webpack:
-    webpackConfig: webpack.config.js
-    includeModules:
-      forceInclude:
-        - clone
-        - core-js
-        - debug
-        - vue
-        - vue-meta
-        - vue-router
-        - vue-server-renderer
-        - vuex
-    packager: yarn
   serverless-offline:
     port: 4000
   s3Sync:
-    - bucketName: "my.bucket" # Retype the bucket name specified above
+    - bucketName: "my-s3-bucket" # Retype the bucket name specified above
       localDir: .nuxt/dist
   customDomain:
-    domainName: "dev.abc.com" # Specify a new domain name to be created
+    domainName: "my-domain.abc.com" # Specify a new domain name to be created
     stage: develop
     certificateName: "*.abc.com" # Enter the Certicate name with that domain
     createRoute53Record: true

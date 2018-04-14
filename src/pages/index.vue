@@ -8,11 +8,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
-import { State } from 'vuex-class'
+import { Component, Vue } from "nuxt-property-decorator";
+import { State } from "vuex-class";
 
 @Component
 export default class Index extends Vue {
-  @State(state => state.version) private version: string
+  @State((state) => state.version) private version: string;
 }
 </script>
