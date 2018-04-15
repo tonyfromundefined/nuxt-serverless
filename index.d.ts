@@ -39,8 +39,6 @@ declare module 'vue/types/options' {
   }
   interface NuxtContext {
     app: ExtendedVue
-    isClient: boolean
-    isServer: boolean
     isStatic: boolean
     isDev: boolean
     isHMR: boolean
