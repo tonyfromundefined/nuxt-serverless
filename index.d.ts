@@ -49,8 +49,8 @@ declare module 'vue/types/options' {
     env: any
     params: any
     query: any
-    req: ParsedRequest
-    res: Response
+    req: any
+    res: any
     redirect: (to: string) => void
     error: (err: Error) => void
     nuxtState: any
