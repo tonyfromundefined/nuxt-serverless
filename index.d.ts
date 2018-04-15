@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueApollo from 'vue-apollo'
 import VueRouter, { Route } from 'vue-router'
 import VueMeta, { MetaInfo } from 'vue-meta'
 import { Store } from 'vuex';
