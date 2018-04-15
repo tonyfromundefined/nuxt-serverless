@@ -14,9 +14,11 @@ Nuxt.js 2.0 Serverless Server-side Rendering Starter on AWS Serverless Stack (La
 
 If you have a feature request, please create a new issue. And also, pull requests are always welcome🙏
 
-# Caution
+### Caution
 - Libraries that are used only by the server or that are used by both the server and the client should be included in the `dependencies`. To optimize the lambda capacity, make sure that the library used only by the client is included in `dev-dependencies`.
+- If you install a `module` for nuxt.js, it must be in a the `dependencies` not `dev-dependencies`
 - Auto generated URL `https://*.execute-api.aws-region-name.amazonaws.com/*` will result in a JavaScript error. (routing problem) Please use the Custom Domain
+- If you encounter `Cannot GET /` error message, the error log can be founded in the AWS CloudWatch
 
 ## Pre-requisites
 - 🔑 **IAM Account** for *Serverless framework* (Requires pre-configuration using `aws configure`)
