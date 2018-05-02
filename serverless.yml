@@ -72,5 +72,5 @@ custom:
   customDomain:
     domainName: "nuxt.mydomain.com" # Specify a new domain name to be created
     stage: develop
-    certificateName: "*.mydomain.com" # Enter the Certicate name with that domain
+    certificateName: "*.mydomain.com" # Enter the Certificate name with that domain
     createRoute53Record: true
