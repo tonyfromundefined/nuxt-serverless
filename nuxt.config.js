@@ -1,7 +1,7 @@
-import express from 'express'
-import cookieParser from 'cookie-parser'
+const express = require('express')
+const cookieParser = require('cookie-parser')
 
-export default {
+module.exports = {
   srcDir: 'src',
   head: {
     title: 'Nuxt Serverless Template',
@@ -41,7 +41,7 @@ export default {
   },
   render: {
     etag: false,
-    // Disabled gzip compression
-    gzip: { threshold: 1073741824 },
+    // Disabled compression
+    compressor: { threshold: 1073741824 },
   }
 }

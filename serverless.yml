@@ -1,0 +1,102 @@
+service: nuxt-serverless
+
+variables:
+  bucketNames:
+    assets: nuxt-serverless-assets-${opt:stage, 'dev'}
+    static: nuxt-serverless-static-${opt:stage, 'dev'}
+  certificateName: 
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    NODE_ENV: production
+    ASSETS_BUCKET_NAME: ${self:variables.bucketNames.assets}
+    STATIC_BUCKET_NAME: ${self:variables.bucketNames.static}
+
+package:
+  exclude:
+    - src/**
+  include:
+    - serverless.yml
+
+functions:
+  nuxt-renderer:
+    handler: handler.render
+    memorySize: 512
+    timeout: 30
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+resources:
+  Resources:
+    AssetsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:variables.bucketNames.assets}
+    AssetsBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: AssetsBucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement: [
+            {
+              Action: ['s3:GetObject'],
+              Effect: 'Allow',
+              Resource: {
+                Fn::Join: ['', ['arn:aws:s3:::', [{ Ref: 'AssetsBucket' }], '/*']],
+              },
+              Principal: '*'
+            },
+          ]
+    StaticBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:variables.bucketNames.static}
+    StaticBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: StaticBucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement: [
+            {
+              Action: ['s3:GetObject'],
+              Effect: 'Allow',
+              Resource: {
+                Fn::Join: ['', ['arn:aws:s3:::', [{ Ref: 'StaticBucket' }], '/*']],
+              },
+              Principal: '*'
+            },
+          ]
+
+plugins:
+  - serverless-offline
+  - serverless-s3-sync
+  - serverless-domain-manager
+
+custom:
+  serverless-offline:
+    port: 4000
+  s3Sync:
+    - bucketName: ${self:variables.bucketNames.assets}
+      localDir: .nuxt/dist
+    - bucketName: ${self:variables.bucketNames.static}
+      localDir: static
+  customDomain:
+    domainName: ${opt:domain-name}
+    stage: ${opt:stage, 'dev'}
+    certificateName: ${opt:certificate-name}
+    createRoute53Record: true

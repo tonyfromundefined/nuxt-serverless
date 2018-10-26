@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nuxt"
+    "dev": "nuxt",
+    "build": "cross-env NODE_ENV=production nuxt build",
+    "start": "sls offline",
+    "deploy": "sls deploy"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
     "serverless-http": "^1.7.2"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "node-sass": "^4.9.4",
     "nuxt-property-decorator": "^1.2.0",
     "sass-loader": "^7.1.0",
