@@ -94,3 +94,4 @@ $ npm run sls:remove
 - [x] static file serve
 - [ ] gzip Compression
 - [ ] optimize the lambda capacity (create SSR bundle with no dependencies)
+> The current `externals` setting can be found on line `3542` of `/node_modules/nuxt/dist/nuxt.js`. There is currently an issue in which this setting can not be overridden in `nuxt.config.js`.
