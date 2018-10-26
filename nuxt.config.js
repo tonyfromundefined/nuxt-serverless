@@ -16,6 +16,9 @@ module.exports = {
     express.json(),
     cookieParser(),
   ],
+  css: [
+    { src: '~/styles/main.scss', lang: 'scss' },
+  ],
   build: {
     extend(config, { isServer }) {
       const tsLoader = {

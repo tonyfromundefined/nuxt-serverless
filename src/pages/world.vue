@@ -9,7 +9,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class Hello extends Vue {
+export default class PageWorld extends Vue {
   private greeting: string = 'This is TypeScript World.'
 }
 </script>

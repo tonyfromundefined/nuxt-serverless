@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
+import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class Hello extends Vue {
-  private greeting: string = "Hello, TypeScript!"
+export default class PageHello extends Vue {
+  private greeting: string = 'Hello, TypeScript!'
 }
 </script>
