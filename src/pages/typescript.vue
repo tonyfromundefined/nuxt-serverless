@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="page-typescript">
     <h1>{{ this.greeting }}</h1>
-    <router-link to="/">home</router-link>
+    <nuxt-link to="/">home</nuxt-link>
   </div>
 </template>
 
@@ -9,7 +9,13 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class PageHello extends Vue {
+export default class PageTypescript extends Vue {
+  private head() {
+    return {
+      title: 'Hello, TypeScript',
+    }
+  }
+
   private greeting: string = 'Hello, TypeScript!'
 }
 </script>
