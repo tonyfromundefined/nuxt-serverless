@@ -1,20 +1,32 @@
-service: nuxt-serverless
-
-variables:
-  bucketNames:
-    assets: nuxt-serverless-assets-${opt:stage, 'dev'}
-    static: nuxt-serverless-static-${opt:stage, 'dev'}
-  certificateName: 
+service: nuxt-serverless  # 1. Edit whole service name
 
 provider:
   name: aws
   runtime: nodejs8.10
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'us-east-1'}
+  region: ap-northeast-2 # 2. Edit AWS region name
   environment:
     NODE_ENV: production
-    ASSETS_BUCKET_NAME: ${self:variables.bucketNames.assets}
-    STATIC_BUCKET_NAME: ${self:variables.bucketNames.static}
+    ### 3. Specify a new AWS S3 bucket namespace for bundled assets and static assets (should be unique)
+    ASSETS_BUCKET_NAME: nuxt-serverless-assets-${opt:stage, 'dev'}
+    STATIC_BUCKET_NAME: nuxt-serverless-static-${opt:stage, 'dev'}
+    ###
+    ASSETS_BUCKET_URL: https://s3.${self:provider.region}.amazonaws.com/${self:provider.environment.ASSETS_BUCKET_NAME}
+    STATIC_BUCKET_URL: https://s3.${self:provider.region}.amazonaws.com/${self:provider.environment.STATIC_BUCKET_NAME}
+
+custom:
+  customDomain:
+    domainName: service.mydomain.io  # 4. Specify a new domain name to be created
+    stage: ${opt:stage, 'dev'}
+    certificateName: mydomain.io  # 5. Enter the certificate name in AWS Certificate Manager (us-east-1) for https connection
+    createRoute53Record: true
+  serverless-offline:
+    port: 4000
+  s3Sync:
+    - bucketName: ${self:provider.environment.ASSETS_BUCKET_NAME}
+      localDir: .nuxt/dist/client
+    - bucketName: ${self:provider.environment.STATIC_BUCKET_NAME}
+      localDir: static
 
 package:
   exclude:
@@ -42,7 +54,7 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:variables.bucketNames.assets}
+        BucketName: ${self:provider.environment.ASSETS_BUCKET_NAME}
     AssetsBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
@@ -55,7 +67,7 @@ resources:
               Action: ['s3:GetObject'],
               Effect: 'Allow',
               Resource: {
-                Fn::Join: ['', ['arn:aws:s3:::', [{ Ref: 'AssetsBucket' }], '/*']],
+                Fn::Join: ['', ['arn:aws:s3:::', { Ref: 'AssetsBucket' }, '/*']],
               },
               Principal: '*'
             },
@@ -63,7 +75,7 @@ resources:
     StaticBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:variables.bucketNames.static}
+        BucketName: ${self:provider.environment.STATIC_BUCKET_NAME}
     StaticBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
@@ -76,7 +88,7 @@ resources:
               Action: ['s3:GetObject'],
               Effect: 'Allow',
               Resource: {
-                Fn::Join: ['', ['arn:aws:s3:::', [{ Ref: 'StaticBucket' }], '/*']],
+                Fn::Join: ['', ['arn:aws:s3:::', { Ref: 'StaticBucket' }, '/*']],
               },
               Principal: '*'
             },
@@ -86,17 +98,3 @@ plugins:
   - serverless-offline
   - serverless-s3-sync
   - serverless-domain-manager
-
-custom:
-  serverless-offline:
-    port: 4000
-  s3Sync:
-    - bucketName: ${self:variables.bucketNames.assets}
-      localDir: .nuxt/dist
-    - bucketName: ${self:variables.bucketNames.static}
-      localDir: static
-  customDomain:
-    domainName: ${opt:domain-name}
-    stage: ${opt:stage, 'dev'}
-    certificateName: ${opt:certificate-name}
-    createRoute53Record: true

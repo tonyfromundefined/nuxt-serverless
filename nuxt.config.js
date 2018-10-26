@@ -10,6 +10,9 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt Serverless Template' },
     ],
+    link: [
+      { rel: 'icon', href: '/static/favicon.ico' },
+    ],
   },
   extensions: ['js', 'ts'],
   serverMiddleware: [
@@ -20,26 +23,21 @@ module.exports = {
     { src: '~/styles/main.scss', lang: 'scss' },
   ],
   build: {
-    extend(config, { isServer }) {
+    extractCSS: true,
+    extend(config) {
       const tsLoader = {
         loader: 'ts-loader',
         options: { appendTsSuffixTo: [/\.vue$/], transpileOnly: true },
         exclude: [/vendor/, /\.nuxt/],
-      };
+      }
       config.module.rules.push({
         test: /((client|server)\.js)|(\.tsx?)$/,
         ...tsLoader,
       })
       config.resolve.extensions.push('.ts')
-      config.module.rules.map((rule) => {
-        if (rule.loader === 'vue-loader') {
-          rule.options.loaders = { ts: tsLoader }
-        }
-        return rule
-      })
-      if (isServer) {
-        config.externals = []
-      }
+      config.module.rules
+        .filter((rule) => rule.loader === 'vue-loader')
+        .map((rule) => rule.options.loaders = { ts: tsLoader })
     },
   },
   render: {
