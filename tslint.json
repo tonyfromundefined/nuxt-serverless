@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"],
+    "no-shadowed-variable": false,
+    "interface-name": false,
+    "max-line-length": false,
+    "member-ordering": false,
+    "no-var-requires": false,
+    "member-access": false,
+    "no-empty": false,
+    "prefer-for-of": false,
+    "variable-name": false
+  }
+}
