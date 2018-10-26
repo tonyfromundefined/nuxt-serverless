@@ -8,9 +8,9 @@
     "build": "cross-env NODE_ENV=production nuxt build",
     "start": "nuxt start",
     "sls:local": "sls offline",
-    "sls:create": "sls create_domain && sls deploy",
+    "sls:create": "npm run build && sls create_domain && sls deploy",
     "sls:delete": "sls remove && sls delete_domain",
-    "sls:deploy": "sls deploy"
+    "sls:deploy": "npm run build && sls deploy"
   },
   "repository": {
     "type": "git",
