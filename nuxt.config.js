@@ -43,6 +43,6 @@ module.exports = {
   render: {
     etag: false,
     // Disabled compression
-    compressor: { threshold: 1073741824 },
+    compressor: { threshold: Infinity },
   }
 }
