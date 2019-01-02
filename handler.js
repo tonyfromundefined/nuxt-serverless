@@ -4,8 +4,8 @@ const express = require('express')
 const nuxtConfig = require('./nuxt.config')
 
 const config = {
-  dev: false,
   ...nuxtConfig,
+  dev: false,
 }
 
 const nuxt = new Nuxt(config)
