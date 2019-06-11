@@ -16,9 +16,6 @@ module.exports = {
     cookieParser(),
   ],
   build: {
-    extend(config) {
-      config.externals = []
-    },
     standalone: true,
   },
   render: {
