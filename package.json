@@ -27,6 +27,8 @@
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "fstream": "^1.0.12",
+    "js-yaml": "^3.13.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
     "nuxt-property-decorator": "^2.3.0",
@@ -35,12 +37,14 @@
     "serverless-apigw-binary": "^0.4.4",
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-s3-sync": "^1.8.0",
+    "tar": "^4.4.10",
     "ts-node": "^8.2.0",
     "tslint": "^5.17.0",
     "typescript": "^3.5.1",
     "vue": "^2.6.10",
     "vuex-class": "^0.3.2",
     "webpack": "^4.33.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.4",
     "webpackbar": "^3.2.0"
   }
