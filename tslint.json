@@ -1,0 +1,30 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts",
+      ".nuxt/**/*.js"
+    ]
+  },
+  "rules": {
+    "semicolon": [true, "never"],
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces", 2],
+    "object-literal-sort-keys": false,
+    "no-shadowed-variable": false,
+    "max-line-length": false,
+    "prefer-for-of": false,
+    "variable-name": false,
+    "no-empty": false,
+    "jsx-boolean-value": false,
+    "no-console": [true, "log"],
+    "member-access": false,
+    "max-classes-per-file": false,
+    "jsx-no-multiline-js": false,
+    "member-ordering": false,
+    "no-var-requires": false
+  }
+}

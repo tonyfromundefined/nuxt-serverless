@@ -1,0 +1,119 @@
+service: nuxt-serverless
+
+plugins:
+  - serverless-s3-sync
+  - serverless-apigw-binary
+  - serverless-dotenv-plugin
+
+package:
+  individually: true
+  excludeDevDependencies: true
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+
+custom:
+  #######################################
+  # Unique ID included in resource names.
+  # Replace it with a random value for every first distribution.
+  # https://www.random.org/strings/?num=1&len=6&digits=on&loweralpha=on&unique=on&format=html&rnd=new
+  stackId: xlf66s
+  #######################################
+
+  buckets:
+    ASSETS_BUCKET_NAME: ${self:service}-${self:custom.stackId}-${self:provider.stage}-assets
+  s3Sync:
+    - bucketName: ${self:custom.buckets.ASSETS_BUCKET_NAME}
+      localDir: .nuxt/dist/client
+  apigwBinary:
+    types:
+      - '*/*'
+
+functions:
+  main:
+    name: ${self:service}-${self:custom.stackId}-${self:provider.stage}-main
+    handler: .nuxt/dist/serverless.handler
+    memorySize: 2048
+    timeout: 30
+    environment:
+      NODE_ENV: production
+    package:
+      include:
+        - .nuxt/dist/serverless.js
+        - .nuxt/dist/server/**
+      exclude:
+        - .nuxt/**
+        - src/**
+        - app.js
+        - nuxt.config.js
+        - nuxt.d.ts
+        - README.md
+        - server.js
+        - serverless.js
+        - serverless.yml
+        - tsconfig.json
+        - tslint.json
+        - webpack.config.js
+        - yarn-error.log
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
+      - http:
+          path: /_nuxt/{proxy+}
+          method: any
+          integration: http-proxy
+          request:
+            uri: https://${self:custom.buckets.ASSETS_BUCKET_NAME}.s3.${self:provider.region}.amazonaws.com/{proxy}
+            parameters:
+              paths:
+                proxy: true
+
+resources:
+  Resources:
+    ClientAssetsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.buckets.ASSETS_BUCKET_NAME}
+        CorsConfiguration:
+          CorsRules:
+            -
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - HEAD
+                - PUT
+                - POST
+                - DELETE
+              MaxAge: 3000
+              ExposedHeaders:
+                - x-amz-server-side-encryption
+                - x-amz-request-id
+                - x-amz-id-2
+
+    ClientAssetsBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: ClientAssetsBucket
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement: [
+            {
+              Action: ['s3:GetObject'],
+              Effect: 'Allow',
+              Resource: {
+                Fn::Join: ['', ['arn:aws:s3:::', { Ref: 'ClientAssetsBucket' }, '/*']],
+              },
+              Principal: '*'
+            },
+          ]
