@@ -1,6 +1,6 @@
 <template>
   <div class='page-index'>
-    <h1>Nuxt Serverless Template {{ this.environments.NUXT_APP_VERSION }}</h1>
+    <h1>Nuxt Serverless Template {{ environments.NUXT_APP_VERSION }}</h1>
     <p>{{ message }}</p>
     <nuxt-link to='/typescript'>typescript</nuxt-link>
     <nuxt-link to='/nuxt'>nuxt</nuxt-link>

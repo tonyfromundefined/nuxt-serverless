@@ -10,11 +10,11 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class PageNuxt extends Vue {
-  greeting: string = 'Hello, Nuxt 2.0!'
+  greeting: string = 'Hello, Nuxt 2.8.1!'
 
   head() {
     return {
-      title: 'Hello, Nuxt 2.0',
+      title: 'Hello, Nuxt 2.8.1',
     }
   }
 }

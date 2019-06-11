@@ -89,6 +89,7 @@ $ yarn deploy
 
 ## Folder Structure
 - `/api`: You can create a sub-API based on Express.js. dynamic ajax Set-Cookie is mainly used.
+  > Let the URL be a `* .json` to distinguish it from the REST API that returns JSON.
 - `/pages`: File-based page routing. All ts files in `/pages` are only alias with `export {default}` to `/services/${serviceName}/pages/**`. all implementations should be done inside `/services`.
 
   ```typescript

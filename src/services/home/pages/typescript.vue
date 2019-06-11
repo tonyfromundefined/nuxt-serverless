@@ -1,6 +1,6 @@
 <template>
   <div class='page-typescript'>
-    <h1>{{ this.greeting }}</h1>
+    <h1>{{ greeting }}</h1>
     <nuxt-link to='/'>home</nuxt-link>
   </div>
 </template>
