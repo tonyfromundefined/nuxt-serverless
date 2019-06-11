@@ -1,13 +1,13 @@
 <template>
-  <div class="page-index">
+  <div class='page-index'>
     <h1>Nuxt Serverless Template {{ this.environments.NUXT_APP_VERSION }}</h1>
     <p>{{ message }}</p>
-    <nuxt-link to="/typescript">typescript</nuxt-link>
-    <nuxt-link to="/nuxt">nuxt</nuxt-link>
+    <nuxt-link to='/typescript'>typescript</nuxt-link>
+    <nuxt-link to='/nuxt'>nuxt</nuxt-link>
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { Component, Vue } from 'nuxt-property-decorator'
 import { State } from 'vuex-class'
 import { IEnvironments } from '~/store'
@@ -36,7 +36,7 @@ export default class PageIndex extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang='scss'>
 .page-index {
   h1 {
     color: #087f5b;
