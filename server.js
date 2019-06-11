@@ -1,4 +1,5 @@
-const { app, build } = require('./app')
+const { Builder } = require('nuxt')
+const { app, nuxt } = require('./app')
 
 const IS_PROD = process.env.NODE_ENV === 'production'
 const PORT = IS_PROD ? 80 : 3000
@@ -11,7 +12,7 @@ main()
 
 async function main() {
   if (!IS_PROD) {
-    await build()
+    await new Builder(nuxt).build()
   }
 
   app.listen(PORT)
