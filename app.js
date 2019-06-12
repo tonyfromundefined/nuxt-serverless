@@ -12,6 +12,8 @@ const nuxt = new Nuxt({
   dev: !IS_PROD,
 })
 
+app.use('/static', express.static('./static'))
+
 app.use(api)
 app.use(nuxt.render)
 

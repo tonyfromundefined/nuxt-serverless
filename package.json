@@ -12,8 +12,11 @@
     "postbuild": "webpack",
     "start": "NODE_ENV=production node ./.nuxt/dist/server.js",
     "deploy:dev": "sls deploy --stage dev",
+    "deploy:stage": "NODE_ENV=production sls deploy --stage stage",
     "deploy:prod": "NODE_ENV=production sls deploy --stage prod",
-    "deploy:stage": "NODE_ENV=production sls deploy --stage stage"
+    "undeploy:dev": "sls remove --stage dev",
+    "undeploy:stage": "NODE_ENV=production sls remove --stage stage",
+    "undeploy:prod": "NODE_ENV=production sls remove --stage prod"
   },
   "dependencies": {
     "nuxt": "^2.8.1"

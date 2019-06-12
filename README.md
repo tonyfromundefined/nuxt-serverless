@@ -2,6 +2,9 @@
 
 Nuxt.js Serverless Server-side Rendering Starter on AWS Serverless Stack (Lambda + API Gateway + S3) with *Serverless Framework*
 
+> ### I recommends you `React.js` + `Next.js` than `Nuxt.js`
+> As your application grows larger, Nuxt.js can go beyond the complexity you can afford. Nuxt.js is more abstract than Next.js, which exponentially increases management costs. And Nuxt.js has a very rapid API change for each version. So, I decided to abandon Nuxt.js. React.js + Next.js is much more useful for complexity management. If you decide to change Nuxt.js to Next.js, check out the *production-ready* **Next.js Starter** that I use. It also support fully serverless deployment. [https://github.com/tonyfromundefined/next-starter](https://github.com/tonyfromundefined/next-starter)
+
 ### Pre-Installed
 - Nuxt.js 2.8.1
 - Serverless Framework
@@ -14,7 +17,7 @@ If you have a feature request, please create a new issue. And also, pull request
 ### Caution
 - Libraries that are used in the client should be included in the `devDependencies` for Bundle size optimization. (because of Lambda Limit)
 - If you install a `module` for nuxt.js, it must be in a the `dependencies` not `devDependencies`
-- Auto generated URL `https://*.execute-api.aws-region-name.amazonaws.com/*` will result in a JavaScript error. (routing problem) Please use the Custom Domain.
+- Auto generated URL `https://*.execute-api.{region}.amazonaws.com/{stage}/` will result in a JavaScript error. (routing problem) **Please use the Custom Domain.**
 - If you encounter `Cannot GET /` error message, the error log can be founded in the AWS CloudWatch.
 
 ## Pre-requisites
@@ -50,14 +53,17 @@ custom:
   # Unique ID included in resource names.
   # Replace it with a random value for every first distribution.
   # https://www.random.org/strings/?num=1&len=6&digits=on&loweralpha=on&unique=on&format=html&rnd=new
-  stackId: xlf66s  # 3. Update Random Stack ID
+  stackId: abcdef  # 3. Update Random Stack ID
   #######################################
 
   buckets:
     ASSETS_BUCKET_NAME: ${self:service}-${self:custom.stackId}-${self:provider.stage}-assets
+    STATIC_BUCKET_NAME: ${self:service}-${self:custom.stackId}-${self:provider.stage}-static
   s3Sync:
     - bucketName: ${self:custom.buckets.ASSETS_BUCKET_NAME}
       localDir: .nuxt/dist/client
+    - bucketName: ${self:custom.buckets.STATIC_BUCKET_NAME}
+      localDir: static
   apigwBinary:
     types:
       - '*/*'
@@ -102,6 +108,5 @@ $ yarn deploy
 
 ## To-do
 - [x] optimize the lambda capacity (create SSR bundle with no dependencies)
-- [ ] static file serve
-  > when `yarn dev` running, static assets should be reachable with baseURL `/static`. but, nuxt.js doesn't support that option
+- [x] static file serve
 - [ ] gzip Compression
