@@ -13,9 +13,6 @@ module.exports = {
     libraryTarget: 'commonjs',
   },
   target: 'node',
-  optimization: {
-		minimize: false,
-  },
   externals: [
     'nuxt',
   ],
