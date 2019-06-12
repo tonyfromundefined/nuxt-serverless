@@ -36,8 +36,8 @@ custom:
       - '*/*'
 
 functions:
-  main:
-    name: ${self:service}-${self:custom.stackId}-${self:provider.stage}-main
+  renderer:
+    name: ${self:service}-${self:custom.stackId}-${self:provider.stage}-renderer
     handler: .nuxt/dist/serverless.handler
     memorySize: 2048
     timeout: 30
