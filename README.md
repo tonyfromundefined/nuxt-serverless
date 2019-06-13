@@ -85,7 +85,14 @@ $ yarn start
 
 ## SERVERLESS DEPLOYMENT ##
 # Build and deploy the function and bundled assets
-$ yarn deploy
+$ yarn deploy:dev
+$ yarn deploy:stage
+$ yarn deploy:prod
+
+# Remove Deployment
+$ yarn undeploy:dev
+$ yarn undeploy:stage
+$ yarn undeploy:prod
 ```
 
 ## Environment Variables
