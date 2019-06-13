@@ -88,6 +88,11 @@ $ yarn start
 $ yarn deploy:dev
 $ yarn deploy:stage
 $ yarn deploy:prod
+
+# Remove Deployment
+$ yarn undeploy:dev
+$ yarn undeploy:stage
+$ yarn undeploy:prod
 ```
 
 ## Environment Variables
