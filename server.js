@@ -6,14 +6,12 @@ const PORT = IS_PROD ? 80 : 3000
 
 require('dotenv').config({
   path: `./.env.${IS_PROD ? 'production' : 'development'}`,
-})
+});
 
-main()
-
-async function main() {
+(async function main() {
   if (!IS_PROD) {
     await new Builder(nuxt).build()
   }
 
   app.listen(PORT)
-}
+})()

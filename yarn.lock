@@ -3724,10 +3724,10 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-express-async-handler@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/express-async-handler/-/express-async-handler-1.1.4.tgz#225a84908df63b35ae9df94b6f0f1af061266426"
-  integrity sha512-HdmbVF4V4w1q/iz++RV7bUxIeepTukWewiJGkoCKQMtvPF11MLTa7It9PRc/reysXXZSEyD4Pthchju+IUbMiQ==
+express-asyncify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/express-asyncify/-/express-asyncify-1.0.0.tgz#6194dddd2a30ed1c28649140485384525e8e1c77"
+  integrity sha1-YZTd3Sow7RwoZJFASFOEUl6OHHc=
 
 express@^4.16.3, express@^4.17.1:
   version "4.17.1"
