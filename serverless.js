@@ -11,7 +11,7 @@ const BINARY_MIME_TYPES = [
   'text/javascript',
   'text/plain',
   'text/text',
-  'text/xml'
+  'text/xml',
 ]
 
 const server = awsServerlessExpress.createServer(app, null, BINARY_MIME_TYPES)
