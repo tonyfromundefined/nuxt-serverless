@@ -2,9 +2,6 @@
 
 Nuxt.js Serverless Server-side Rendering Starter on AWS Serverless Stack (Lambda + API Gateway + S3) with *Serverless Framework*
 
-> ### I recommends you `React.js` + `Next.js` than `Nuxt.js`
-> As your application grows larger, Nuxt.js can go beyond the complexity you can afford. Nuxt.js is more abstract than Next.js, which exponentially increases management costs. And Nuxt.js has a very rapid API change for each version. So, I decided to abandon Nuxt.js. React.js + Next.js is much more useful for complexity management. If you decide to change Nuxt.js to Next.js, check out the *production-ready* **Next.js Starter** that I use. It also support fully serverless deployment. [https://github.com/tonyfromundefined/next-starter](https://github.com/tonyfromundefined/next-starter)
-
 ### Pre-Installed
 - Nuxt.js 2.8.1
 - Serverless Framework
